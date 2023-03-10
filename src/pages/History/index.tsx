@@ -28,26 +28,25 @@ export function History() {
                   <>
                     <tr key={cycle.id}>
                       <td>{cycle.task}</td>
-                      <td>{cycle.minutesAmount}</td>
-                      <td>{cycle.startDate.toISOString()}</td>
+                      <td>{cycle.minutesAmount} minutos</td>
                       <td>
                         {formatDistanceToNow(cycle.startDate, {
                           addSuffix: true,
                           locale: ptBR,
                         })}
                       </td>
+                      <td>
+                        {cycle.finishedDate && (
+                          <Status statusColor="green">Concluído</Status>
+                        )}
+                        {cycle.interruptDate && (
+                          <Status statusColor="red">Interrompido</Status>
+                        )}
+                        {!cycle.finishedDate && !cycle.interruptDate && (
+                          <Status statusColor="yellow">Em andamento</Status>
+                        )}
+                      </td>
                     </tr>
-                    <td>
-                      {cycle.finishedDate && (
-                        <Status statusColor="green">Concluído</Status>
-                      )}
-                      {cycle.interruptDate && (
-                        <Status statusColor="red">Interrompido</Status>
-                      )}
-                      {!cycle.finishedDate && (
-                        <Status statusColor="yellow">Em andamento</Status>
-                      )}
-                    </td>
                   </>
                 )
               })}
